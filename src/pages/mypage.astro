@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/"
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import {ClientRouter} from "astro:transitions";
+const test = 67
+---
+
+<html lang="en">
+    <head>
+        <BaseHead title="My page" description="my page description" />
+        <ClientRouter />
+    </head>
+   <body>
+    <Header />
+    <main>
+        <h1>my page</h1>
+        <p>Welcome to my page</p>
+    </main>
+    </body>
+<Footer />
+</html>
