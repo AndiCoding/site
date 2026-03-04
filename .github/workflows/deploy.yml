@@ -15,4 +15,4 @@ jobs:
       - name: Deploy with Docker Compose
         run: |
           cp -r . /home/runner/deployment_inbox/frontend
-          docker compose -f /home/runner/deployment_inbox/docker-compose.yml up -d --build frontend
+          docker compose -p website-project -f /home/runner/deployment_inbox/docker-compose.yml up -d --build --remove-orphans frontend
