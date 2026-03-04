@@ -14,5 +14,5 @@ jobs:
 
       - name: Deploy with Docker Compose
         run: |
-          # This command tells your Pi to rebuild the frontend
+          cd ..
           docker compose up -d --build frontend
