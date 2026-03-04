@@ -14,6 +14,6 @@ jobs:
 
       - name: Deploy with Docker Compose
         run: |
-          cp -r . /home/andreas/Documents/docker/website/
-          docker compose -f /home/andreas/Documents/docker/website/docker-compose.yml up -d --build frontend
+          sudo cp -r ./frontend /home/andreas/Documents/docker/website/
+          sudo docker compose -f /home/andreas/Documents/docker/website/docker-compose.yml up -d --build frontend
           
