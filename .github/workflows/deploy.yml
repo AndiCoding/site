@@ -15,4 +15,4 @@ jobs:
       - name: Deploy with Docker Compose
         run: |
           cd ..
-          docker compose up -d --build frontend
+          docker-compose up -d --build frontend
