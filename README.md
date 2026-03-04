@@ -1,5 +1,5 @@
 # Astro Starter Kit: Blog
-testing runner
+Checking runner success
 ```sh
 npm create astro@latest -- --template blog
 ```
