@@ -16,3 +16,4 @@ jobs:
         run: |
           cp -r . /home/andreas/Documents/docker/website/
           docker compose -f /home/andreas/Documents/docker/website/docker-compose.yml up -d --build frontend
+          
