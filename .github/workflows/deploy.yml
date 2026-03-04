@@ -1,0 +1,18 @@
+name: Pi Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy with Docker Compose
+        run: |
+          # This command tells your Pi to rebuild the frontend
+          docker compose up -d --build frontend
