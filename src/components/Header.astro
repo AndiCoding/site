@@ -12,6 +12,12 @@ import HeaderLink from './HeaderLink.astro';
 			<HeaderLink href="/about">About</HeaderLink>
 			<HeaderLink href="/mypage">My page</HeaderLink>
 		</div>
+
+		<button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">
+			<span class="sr-only">Toggle menu</span>
+			<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+		</button>
+
 		<div class="social-links">
 			<a href="https://www.linkedin.com/in/andreas-valdal-563b402b3/" target="_blank">
 				<span class="sr-only">Follow me on LinkedIn</span>
@@ -52,6 +58,7 @@ import HeaderLink from './HeaderLink.astro';
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		position: sticky;
 	}
 	nav a {
 		padding: 1em 0.5em;
@@ -63,13 +70,60 @@ import HeaderLink from './HeaderLink.astro';
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
+	.internal-links {
+		display: flex;
+	}
 	.social-links,
 	.social-links a {
 		display: flex;
 	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
+	.menu-toggle {
+		display: none;
 	}
+	@media (max-width: 720px) {
+		.menu-toggle { display: block; }
+
+		/* dropdown styling: hidden by default */
+		.internal-links {
+			display: none;
+			flex-direction: column;
+			gap: 0.5rem;
+			position: absolute;
+			left: 1em;
+			right: 1em;
+			top: calc(100% + 0.5rem);
+			background: white;
+			padding: 0.75rem;
+			border-radius: 8px;
+			box-shadow: 0 8px 24px rgba(var(--gray), 20%);
+			z-index: 40;
+		}
+		/* when menu opened on nav, show dropdown */
+		nav.menu-open .internal-links {
+			display: flex;
+		}
+
+		.social-links { display: none; }
+	}
+
 </style>
+
+<script>
+	(function () {
+		// Toggle logic extracted to a stable function
+		function toggleMenu(btn, nav) {
+			const expanded = btn.getAttribute('aria-expanded') === 'true';
+			btn.setAttribute('aria-expanded', String(!expanded));
+			nav.classList.toggle('menu-open');
+		}
+
+		// Use event delegation so the handler survives button re-renders
+		document.addEventListener('click', function (e) {
+			const btn = e.target.closest('.menu-toggle');
+			if (!btn) return;
+			const nav = document.querySelector('nav');
+			if (!nav) return;
+			toggleMenu(btn, nav);
+		});
+	})();
+</script>
