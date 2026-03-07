@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 @import "tailwindcss";
+
 
 :root {
   --background: #ffffff;
@@ -17,6 +19,23 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+
+
+@layer utilities {
+  .bg-gradient {
+    background: linear-gradient(to bottom, rgb(27, 27, 52), rgb(8, 30, 52), rgb(8, 30, 52));
+  }
+  .dark-bg-gradient {
+    background: linear-gradient(to bottom, rgb(27, 27, 52), rgb(8, 30, 52), rgb(8, 30, 52));
+  }
+}
+
+
+
+html, body {
+  overflow-clip: ;
 }
 
 body {
