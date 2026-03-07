@@ -1,6 +1,7 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+import ThemeIcon      from "./ThemeIcon.astro";
 ---
 
 <header>
@@ -8,9 +9,9 @@ import HeaderLink from './HeaderLink.astro';
 		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-			<HeaderLink href="/mypage">My page</HeaderLink>
+			<HeaderLink href="/">Blog</HeaderLink>
+			<HeaderLink href="/">About</HeaderLink>
+			<HeaderLink href="/">My page</HeaderLink>
 		</div>
 
 		<button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">
