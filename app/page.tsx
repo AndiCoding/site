@@ -7,8 +7,8 @@ export default function Home() {
   return (
       <main className=" flex  w-full flex-col  justify-between  bg-gradient dark:dark-bg-gradient sm:items-start">
         <Hero id="hero" className="w-full h-screen" />
-          <Experience id="experience" className="w-full " />
-          <Projects id="projects" className="w-full" />
+          {/*<Experience id="experience" className="w-full " />*/}
+          {/*<Projects id="projects" className="w-full" />*/}
           <Sidebar />
       </main>
   );
