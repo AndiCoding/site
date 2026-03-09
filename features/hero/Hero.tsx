@@ -35,16 +35,18 @@ const Hero = ({className = 'name', id}: HeroProps) => {
     }, [])
 
     return (
-        <section id={id} className={`px-8 md:px-30 flex flex-col justify-center ${className} space-y-8`}>
-            <div className="z-10  space-y-8">
-                <div className="mt-40 space-y-2 min-w-sm">
+        <section id={id} className={`px-8 md:px-30 flex flex-col justify-center ${className}`}>
+            <div className="z-10  space-y-4">
+                <div className="sm:mt-40 space-y-2 min-w-sm">
                     <p className="text-3xl text-green-400 text">Hi, my name is</p>
-                    <h1 className="min-w-md text-6xl font-extrabold text-gray-100 text">Andreas Valdal</h1>
-                    <h2 className="text-2xl font-extrabold text-gray-400 text">I´m passionate about computers</h2>
+                    <h1 className="sm:min-w-md text-6xl font-extrabold text-gray-100 text">Andreas Valdal</h1>
+                    <h2 className="text-2xl font-extrabold text-gray-400 text">I´m passionate about <span className="block sm:inline">computers</span></h2>
                 </div>
-                <p className="min-w-sm description text-gray-500 min-h-40 max-w-xs sm:max-w-sm md:max-w-md">
-                    A dedicated developer focused on building seamless web and mobile applications, with a passion solving technical problems. Anything from building UI, writing backend and deploying applications to the web
-                </p>
+                <div className="description text-gray-500 max-w-xs ">
+                    <span>A dedicated developer focused on building </span>
+                    <span>seamless web and mobile applications, </span>
+                    <span>with a passion for solving technical problems.</span>
+                </div>
             </div>
             {/*<div className="right-0 absolute bg-red-400 border-2 rounded-xl z-0 w-full lg:w-5/12 h-3/4" />*/}
         </section>

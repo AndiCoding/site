@@ -35,7 +35,7 @@
 
 
 html, body {
-  overflow-clip: ;
+  overflow-x: hidden;
 }
 
 body {

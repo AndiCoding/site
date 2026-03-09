@@ -17,7 +17,7 @@ const Sidebar = () => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
     return (
-        <div className="fixed bottom-8 left-8 z-50 flex flex-col items-start gap-3">
+        <div className="fixed bottom-8 md:left-8 z-50 flex md:flex-col w-full justify-center md:items-start gap-3">
             {links.map((link, index) => (
                 <a
                     key={link.label}
@@ -33,7 +33,7 @@ const Sidebar = () => {
                     </span>
                     <span
                         className={`text-sm text-gray-400 group-hover:text-green-400 transition-all duration-300 whitespace-nowrap overflow-hidden ${
-                            hoveredIndex === index ? 'max-w-60 opacity-100' : 'max-w-0 opacity-0'
+                            hoveredIndex === index ? 'md:max-w-60 opacity-100' : 'max-w-0 opacity-0'
                         }`}
                     >
                         {link.label}
@@ -42,7 +42,7 @@ const Sidebar = () => {
             ))}
 
             {/* Vertical line going slightly up */}
-            <div className="mt-2 ml-3.5 w-px h-16 bg-gradient-to-b from-white/20 to-transparent" />
+            <div className="mt-2 ml-3.5 md:w-px m:h-16 bg-gradient-to-b from-white/20 to-transparent" />
         </div>
     )
 }
