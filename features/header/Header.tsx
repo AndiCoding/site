@@ -1,17 +1,60 @@
-import React from 'react'
+'use client'
+
+import React, {useState, useRef, useEffect} from 'react'
+import {Moon, Sun}                          from "lucide-react";
 
 type HeaderProps = {
     className?: string;
 }
 
 const Header = ({ className = '' }: HeaderProps) => {
+    const [visible, setVisible] = useState(true)
+    const lastScrollY = useRef(0)
+    const [isDark, setIsDark] = useState(true)
+
+    useEffect(() => {
+        const stored = localStorage.getItem('theme') || 'dark'
+        setIsDark(stored === 'dark')
+        document.documentElement.setAttribute('data-theme', stored)
+    }, [])
+
+    const toggleTheme = () => {
+        const next = isDark ? 'light' : 'dark'
+        setIsDark(!isDark)
+        localStorage.setItem('theme', next)
+        document.documentElement.setAttribute('data-theme', next)
+    }
+
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY
+
+            if (currentScrollY < lastScrollY.current || currentScrollY < 10) {
+                // Scrolling up or near top → show
+                setVisible(true)
+            } else {
+                // Scrolling down → hide
+                setVisible(false)
+            }
+
+            lastScrollY.current = currentScrollY
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+
     return (
-        <header className={`${className} fixed top-4 left-1/2 -translate-x-1/2 z-50`}>
+        <header className={`${className} fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-transform duration-300 ${
+            visible ? 'translate-y-0' : '-translate-y-24'
+        }`}>
             <ul className="flex items-center py-3 px-2 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-sm shadow-lg divide-x divide-white/10">
                 <li>
                     <a
                         href="#hero"
-                        className="text-sm text-gray-400 hover:text-green-400 border border-transparent hover:drop-shadow-[0_0_6px_rgba(74,222,128,0.5)] transition-all duration-200 font-medium tracking-wide px-5 py-1 rounded-lg block"
+                        className={`text-sm ${isDark ? "text-gray-200" : "text-gray-700"} hover:text-purple-700 border border-transparent hover:drop-shadow-2xl drop-shadow-grape-soda-500 transition-all duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
                     >
                         Hero
                     </a>
@@ -19,7 +62,8 @@ const Header = ({ className = '' }: HeaderProps) => {
                 <li>
                     <a
                         href="#experience"
-                        className="text-sm text-gray-400 hover:text-green-400 border border-transparent hover:drop-shadow-[0_0_6px_rgba(74,222,128,0.5)] transition-all duration-200 font-medium tracking-wide px-5 py-1 rounded-lg block"
+                        className={`text-sm ${isDark ? "text-gray-200" : "text-gray-700"} hover:text-purple-700 border border-transparent hover:drop-shadow-2xl drop-shadow-grape-soda-500 transition-all duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
+
                     >
                         Experience
                     </a>
@@ -27,10 +71,21 @@ const Header = ({ className = '' }: HeaderProps) => {
                 <li>
                     <a
                         href="#projects"
-                        className="text-sm text-gray-400 hover:text-green-400 border border-transparent hover:drop-shadow-[0_0_6px_rgba(74,222,128,0.5)] transition-all duration-200 font-medium tracking-wide px-5 py-1 rounded-lg block"
+                        className={`text-sm ${isDark ? "text-gray-200" : "text-gray-700"} hover:text-purple-700 border border-transparent hover:drop-shadow-2xl drop-shadow-grape-soda-500 transition-all duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
+
                     >
                         Projects
                     </a>
+                </li>
+                <li>
+                    <button
+                        onClick={toggleTheme}
+                        aria-label="Toggle theme"
+                        className={`text-sm ${isDark ? "text-gray-200" : "text-gray-700"} hover:text-purple-700 border border-transparent hover:drop-shadow-2xl drop-shadow-grape-soda-500 transition-all duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
+
+                    >
+                        {isDark ? <Sun /> : <Moon />}
+                    </button>
                 </li>
             </ul>
         </header>

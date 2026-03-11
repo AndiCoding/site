@@ -42,7 +42,7 @@ const Sidebar = () => {
             ))}
 
             {/* Vertical line going slightly up */}
-            <div className="mt-2 ml-3.5 md:w-px m:h-16 bg-gradient-to-b from-white/20 to-transparent" />
+            <div className="mt-2 ml-3.5 md:w-px md:h-16 bg-gradient-to-b from-white/20 to-transparent" />
         </div>
     )
 }

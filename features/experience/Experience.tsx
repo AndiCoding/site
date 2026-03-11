@@ -3,6 +3,7 @@ import React, { useRef } from 'react'
 import { useGSAP } from "@gsap/react"
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import ExperienceCard from "@/features/experience/ExperienceCard";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,53 +31,117 @@ const experiences = [
         period: '2019 – 2021',
         description: 'Assisted in building mobile apps and internal tools.',
     },
+    {
+        title: 'Junior Developer',
+        company: 'Company C',
+        period: '2019 – 2021',
+        description: 'Assisted in building mobile apps and internal tools.',
+    },
+    {
+        title: 'Junior Developer',
+        company: 'Company C',
+        period: '2019 – 2021',
+        description: 'Assisted in building mobile apps and internal tools.',
+    },
 ]
+
+const HEADER_HEIGHT = 60
+const SCROLL_PER_CARD = 300
 
 const Experience = ({ className = "", id }: ExperienceProps) => {
     const sectionRef = useRef<HTMLElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
 
     useGSAP(() => {
-        const tl = gsap.timeline({
+        const cards = gsap.utils.toArray<HTMLElement>('.exp-card')
+        const totalCards = cards.length
+
+        // 1) Position cards FIRST — before any animation
+        cards.forEach((card, i) => {
+            if (i > 0) {
+                gsap.set(card, {
+                    position: 'absolute',
+                    top: i * HEADER_HEIGHT,
+                    left: 0,
+                    width: '100%',
+                    yPercent: 200,
+                    zIndex: i,
+                    opacity: 1, // already visible, just off-screen
+                })
+            } else {
+                gsap.set(card, {
+                    position: 'relative',
+                    zIndex: 0,
+                })
+            }
+        })
+
+        // 2) Intro animation — only heading + first card
+        const introTl = gsap.timeline({
             scrollTrigger: {
                 trigger: sectionRef.current,
                 start: 'top 70%',
                 toggleActions: 'play none none none',
             }
         })
-
-        tl.from('.exp-heading', {
-            opacity: 0,
-            y: 40,
-            duration: 0.6,
-            ease: 'power3.out',
+        introTl.from('.exp-heading', {
+            opacity: 0, y: 40, duration: 0.6, ease: 'power3.out',
         })
-        tl.from('.exp-card', {
-            opacity: 0,
-            y: 60,
-            stagger: 0.2,
-            duration: 0.6,
-            ease: 'power3.out',
+        introTl.from(cards[0], {
+            opacity: 0, y: 60, duration: 0.6, ease: 'power3.out',
         }, '-=0.3')
+
+        // 3) Scrubbed stacking timeline
+        const totalScroll = (totalCards - 1) * SCROLL_PER_CARD
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: 'top 80px',
+                end: `+=${totalScroll}`,
+                pin: true,
+                pinSpacing: true,
+                scrub: true,
+            }
+        })
+
+        for (let i = 1; i < totalCards; i++) {
+            const progress = (i - 1) / (totalCards - 1)
+
+            tl.to(cards[i], {
+                yPercent: 0,
+                duration: 0.5,
+                ease: 'none',
+            }, progress)
+
+            tl.to(cards[i - 1], {
+                height: HEADER_HEIGHT,
+                overflow: 'hidden',
+                duration: 0.5,
+                ease: 'none',
+            }, progress)
+        }
+
     }, { scope: sectionRef })
 
     return (
-        <section ref={sectionRef} id={id} className={`px-8 md:px-30 py-24 ${className}`}>
+        <section
+            ref={sectionRef}
+            id={id}
+            className={`px-8 md:px-30 py-24 mt-16  ${className}`}
+        >
             <h3 className="exp-heading text-4xl font-extrabold text-gray-100 text-center mb-16">
                 My <span className="text-green-400">Experience</span>
             </h3>
-            <div className="flex flex-col gap-6 max-w-3xl mx-auto">
+            <div ref={containerRef} className="relative max-w-3xl mx-auto" style={{ minHeight: '30rem' }}>
                 {experiences.map((exp, i) => (
-                    <div
+                    <ExperienceCard
+                        className="exp-card"
                         key={i}
-                        className="exp-card border border-gray-700 rounded-xl p-6 bg-white/5 backdrop-blur-sm hover:border-green-400 transition-colors duration-300"
-                    >
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-                            <h4 className="text-xl font-bold text-gray-100">{exp.title}</h4>
-                            <span className="text-sm text-green-400 font-medium">{exp.period}</span>
-                        </div>
-                        <p className="text-gray-400 text-sm font-semibold mb-3">{exp.company}</p>
-                        <p className="text-gray-500 text-sm leading-relaxed">{exp.description}</p>
-                    </div>
+                        title={exp.title}
+                        company={exp.company}
+                        period={exp.period}
+                        description={exp.description}
+                    />
                 ))}
             </div>
         </section>

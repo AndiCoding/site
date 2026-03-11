@@ -15,23 +15,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Andreas valdal",
-  description: "My website that will showcase what im doing",
+  title: "Your App",
+  description: "Your description",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-      <Header className="absolute top-0 w-full z-50 min-h-16 flex justify-around" />
-      {children}
-      {/*<Footer className="min-h-16 flex justify-around text-center" />*/}
+    <html lang="en" suppressHydrationWarning>
+      <head>
+          <script dangerouslySetInnerHTML={{__html: `
+  const theme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+`}} />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Header className="absolute w-full z-50 min-h-16 flex justify-around" />
+        {children}
+      <Footer />
       </body>
     </html>
   );
