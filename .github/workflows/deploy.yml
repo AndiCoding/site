@@ -1,3 +1,9 @@
+# ------------------------------------------------------------------
+# Continuous Deployment Workflow
+# Deploys to a self-hosted Raspberry Pi runner via Docker Compose
+# ------------------------------------------------------------------
+
+
 name: Pi Deployment
 
 on:
