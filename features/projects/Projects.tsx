@@ -3,43 +3,16 @@ import React, { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import {Project}         from "@/types/Project";
 
 gsap.registerPlugin(ScrollTrigger)
 
 type ProjectsProps = {
     className?: string
-    id: string
+    projects: Project[]
 }
 
-type Project = {
-    title: string
-    stack: string[]
-    description: string
-    link?: string
-}
-
-const projects : Project[] = [
-    // {
-    //     title: 'Portfolio Website',
-    //     stack: ['Next.js', 'TypeScript', 'Tailwind', 'GSAP'],
-    //     description: 'Personal portfolio built with Next.js and animated with GSAP.',
-    //     link: '#',
-    // },
-    // {
-    //     title: 'E-Commerce App',
-    //     stack: ['React', 'Node.js', 'MongoDB'],
-    //     description: 'Full-stack e-commerce platform with auth, cart and payment integration.',
-    //     link: '#',
-    // },
-    // {
-    //     title: 'Mobile Finance Tracker',
-    //     stack: ['React Native', 'Expo', 'Firebase'],
-    //     description: 'Cross-platform app for tracking personal income and expenses.',
-    //     link: '#',
-    // },
-]
-
-const Projects = ({ className = "", id }: ProjectsProps) => {
+export const Projects = ({ className = "", projects}: ProjectsProps) => {
     const sectionRef = useRef<HTMLElement>(null)
 
     useGSAP(() => {
@@ -68,11 +41,10 @@ const Projects = ({ className = "", id }: ProjectsProps) => {
 
 
     return (
-        <section ref={sectionRef} id={id} className={`px-8 md:px-30 py-24 ${className}`}>
+        <section ref={sectionRef}  className={`px-8 md:px-30 py-24 ${className}`}>
             <h3 className="proj-heading text-4xl font-extrabold text-foreground text-center mb-16">
                 My <span className="text-highlight">Projects</span>
             </h3>
-            <h4 className="text-center font-bold text-lg">Work in progress 🛠️</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 {projects && projects.map((proj, i) => (
                     <div
@@ -84,12 +56,12 @@ const Projects = ({ className = "", id }: ProjectsProps) => {
                                 {proj.title}
                             </h4>
                             <p className="text-soft-periwinkle-200 text-sm leading-relaxed mb-4">
-                                {proj.description}
+                                {proj.shortDescription}
                             </p>
                         </div>
                         <div className="flex flex-col gap-4">
                             <div className="flex flex-wrap gap-2">
-                                {proj.stack.map((technology, j) => (
+                                {proj.technologiesUsed && proj.technologiesUsed.map((technology, j) => (
                                     <span
                                         key={j}
                                         className="text-xs text-highlight border border-soft-periwinkle-400/30 bg-soft-periwinkle-400/10 rounded-full px-3 py-1"
@@ -99,7 +71,7 @@ const Projects = ({ className = "", id }: ProjectsProps) => {
                                 ))}
                             </div>
                             <a
-                                href={proj.link}
+                                href={proj.slug}
                                 className="text-sm text-soft-periwinkle-300 hover:text-highlight transition-colors duration-300 font-medium"
                             >
                                 View Project →
@@ -111,5 +83,3 @@ const Projects = ({ className = "", id }: ProjectsProps) => {
         </section>
     )
 }
-
-export default Projects

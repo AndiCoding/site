@@ -2,9 +2,9 @@
 import { initializeApp, getApps } from "firebase/app";
 // Add other imports you need, e.g., getAuth, getFirestore
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-// 1. We read the config from the Environment Variables
-// Note: Change 'process.env' to 'process.env' if using Next.js or CRA
+
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -20,4 +20,5 @@ let app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
 // 3. Export the services you need
 export const auth = getAuth(app);
+export const db = getFirestore();
 export default app;
