@@ -5,52 +5,23 @@ import {gsap} from "gsap"
 
 type ProjectCardProps = {
     project: Project
-    expandedProject: string
-    addAnimation: (animation: gsap.core.Tween ,index: number) => void,
-    index: number
-    onSelect: (projectTitle: string) => void
 }
 
-const ProjectCard = ({project, index, addAnimation, expandedProject, onSelect}: ProjectCardProps) => {
+const ProjectCard = ({project}: ProjectCardProps) => {
     const cardRef = useRef<HTMLDivElement>(null);
     
-    useGSAP(() => {
-        const element = cardRef.current
-        if (!element) return 
-        
-        const entryTween = gsap.from(element, {
-            duration: 1,
-            ease: 'bounce.out'
-        })
-        
-        addAnimation && addAnimation(entryTween, index)
-    }, [addAnimation])
+    const { contextSafe } = useGSAP({scope: cardRef});
     
-    useGSAP(() => {
-        const element = cardRef.current
-        const exp = expandedProject === project.title
-        if (!element) return
-        gsap.to(element, {
-            scale: exp ? 1.4 : 1,
-            zIndex: exp ? 1 : 0,
-            duration: 0.2,
-            ease: 'power1.out',
-            overwrite: 'auto',
-            immediateRender: false
-        })
-    }, [expandedProject, project.title])
+    const onCardClick = contextSafe(() => {
+        gsap.to(cardRef.current, {rotation: 180});
+    })
 
-    const handleClick = () => {
-        onSelect && onSelect(project.title)
-    }
-    
-    return (
+     return (
         <div ref={cardRef}
-             onClick={handleClick}
-             role="button"
              tabIndex={0}
-             aria-expanded={expandedProject === project.title}
-            className="proj-card flex flex-col justify-between border w-full border-gray-300/70 dark:border-gray-700 rounded-xl p-6 bg-white dark:bg-zinc-900 backdrop-blur-sm hover:border-violet-500 transition-colors duration-300 group"
+             onClick={onCardClick}
+             role="button"
+            className="project-card flex flex-col justify-between border w-full border-gray-300/70 dark:border-gray-700 rounded-xl p-6 bg-white dark:bg-zinc-900 backdrop-blur-sm hover:border-violet-500 transition-colors duration-300 group"
         >
         <div>
             <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-300 transition-colors duration-300">
@@ -61,7 +32,7 @@ const ProjectCard = ({project, index, addAnimation, expandedProject, onSelect}: 
             </p>
         </div>
     <div className="flex flex-col gap-4">
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 categories">
             {project.technologiesUsed && project.technologiesUsed.map((technology, j) => (
                 <span
                     key={j}
@@ -71,12 +42,6 @@ const ProjectCard = ({project, index, addAnimation, expandedProject, onSelect}: 
                 </span>
             ))}
         </div>
-        {/*{ expandedProject === project.title && <a*/}
-        {/*    href={project.slug}*/}
-        {/*    className="text-sm text-sky-700 dark:text-sky-300 hover:text-violet-600 dark:hover:text-violet-300 transition-colors duration-300 font-medium"*/}
-        {/*>*/}
-        {/*    View Project →*/}
-        {/*</a>}*/}
     </div>
         </div>
     )
