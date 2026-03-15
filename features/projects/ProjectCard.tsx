@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import {Project}       from "@/types/Project";
 import {useGSAP}       from "@gsap/react";
 import {gsap} from "gsap"
+import {LucideArrowRight} from "lucide-react";
 
 type ProjectCardProps = {
     project: Project
@@ -22,16 +23,30 @@ const ProjectCard = ({project, positionClasses}: ProjectCardProps) => {
     }
 
      return (
-        <div ref={cardRef}
-             tabIndex={0}
-             onClick={onCardClick}
-             role="button"
-            className={` ${positionClasses}  border-gray-300/70 dark:border-gray-700 bg-white hover:cursor-pointer dark:bg-zinc-900 backdrop-blur-sm hover:border-violet-500 transition-colors duration-300 group`}
-        >
+         <div ref={cardRef}
+              tabIndex={0}
+              className={` ${positionClasses}
+                border border-transparent
+                bg-white  dark:bg-zinc-900
+                hover:border-violet-300 dark:hover:border-violet-700
+                backdrop-blur-sm transition-colors duration-300 group
+                select-none
+              `}
+         >
+            
         <div>
-            <h4 className="text-xl font-bold  text-gray-900 dark:text-white mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-300 transition-colors duration-300">
-                {project.title}
-            </h4>
+            <div className="flex justify-between items-start ">
+                <h4 className="text-xl font-bold  text-gray-900 dark:text-white mb-3 transition-colors duration-300">
+                    {project.title}
+                </h4>
+                <button
+                    onClick={onCardClick}
+                    className="cursor-pointer hover:text-violet-600 dark:hover:text-violet-300">
+                    View on Github
+                    <LucideArrowRight className="inline" height={16} width={16} />
+                </button>
+            </div>
+           
             <p className=" text-gray-700 dark:text-gray-300    text-sm  mb-4">
                 {project.shortDescription}
             </p>
