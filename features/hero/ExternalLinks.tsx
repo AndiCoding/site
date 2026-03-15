@@ -1,5 +1,7 @@
 "use client"
-import React from "react"
+import React, {useRef} from "react"
+import {useGSAP}       from "@gsap/react";
+import {gsap} from "gsap"
 
 
 type SocialLink = {
@@ -9,16 +11,37 @@ type SocialLink = {
 }
 
 const links: SocialLink[] = [
-    { label: 'GitHub', href: 'https://github.com/AndiCoding', icon: 'GH' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/andreas-valdal-563b402b3/', icon: 'IN' },
+    { label: 'GitHub', href: 'https://github.com/AndiCoding', icon: 'Github' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/andreas-valdal-563b402b3/', icon: 'LinkedIn' },
     { label: 'andreasnilsenvaldal@gmail.com', href: 'mailto:andreasnilsenvaldal@gmail.com', icon: '@' },
 ]
 
 
 const ExternalLinks = () => {
+    const containerRef = useRef<HTMLDivElement | null>(null)
+    const tl = useRef<gsap.core.Timeline | null>(null)
+
+    useGSAP(() => {
+        gsap.set('a', {
+            opacity: 0,
+            x: 40,
+            scale: 0.2,
+        })
+        
+        tl.current = gsap
+            .timeline()
+            .to('a', {
+                duration: 1.2,
+                ease: 'elastic.inOut',
+                stagger: 0.2,
+                opacity: 1,
+                x:0,
+                scale: 1,
+            })
+    }, {scope: containerRef})
 
     return (
-        <div className="bottom-8 md:left-8 z-50 flex w-full justify-center md:items-start gap-3">
+        <div ref={containerRef} className="bottom-8 md:left-8 z-50 flex w-full justify-center md:items-start gap-3">
             {links.map((link) => (
                 <a
                     key={link.label}
@@ -31,23 +54,9 @@ const ExternalLinks = () => {
                 >
                     
                     <span
-                        className={
-                            // Animate scale and slight lift on hover. Respect reduced motion.
-                            'w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 text-xs font-bold shrink-0 '
-                            + 'transition duration-200 transform '
-                            + 'group-hover:scale-105 group-hover:-translate-y-1 group-hover:border-indigo-400 group-hover:text-indigo-400 '
-                            + 'motion-reduce:transition-none motion-reduce:transform-none'
-                        }
+                        className='w-24 h-16 flex items-center justify-center rounded border text-gray-500 transition-colors duration-200 whitespace-nowrap overflow-hidden group-hover:text-indigo-400 motion-reduce:transition-none'
                     >
                         {link.icon}
-                    </span>
-                    <span
-                        className={
-                            'text-sm text-gray-500 transition-colors duration-200 whitespace-nowrap overflow-hidden '
-                            + 'group-hover:text-indigo-400 motion-reduce:transition-none'
-                        }
-                    >
-                        {link.label}
                     </span>
                 </a>
             ))}
