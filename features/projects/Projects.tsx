@@ -38,7 +38,7 @@ export const Projects = ({ className = "", projects}: ProjectsProps) => {
         }, []);
 
     return (
-        <section ref={sectionRef} id="projects" className={` border py-24 ${className}`}>
+        <section ref={sectionRef} id="projects" className={`px-4 py-24 ${className}`}>
             <h3 className="proj-heading text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-16">
                 My <span className="text-violet-600 dark:text-violet-300">Projects</span>
             </h3>
