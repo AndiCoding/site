@@ -2,14 +2,26 @@ import {db} from "@/firebase";
 import { Project } from "@/types/Project"
 import { collection, getDocs, query, where, limit } from "firebase/firestore"
 
-export async function getProjects(): Promise<Project[]> {
+
+
+// SSG. The projects are not fetched on every refresh, instead its fetched every 20 seconds
+export async function getStaticProjects() {
     const q = collection(db, "projects");
     const snap = await getDocs(q);
-    return snap.docs.map(doc => {
-        const data = doc.data() as Omit<Project, "id">;
-        return { id: doc.id, ...data};
-    })
+    const projectsData = snap.docs.map(doc => ({
+        id: doc.id,
+        ...(doc.data() as Omit <Project, "id">)
+    }))
+
+    return {
+        props: {
+            projects: projectsData,
+        },
+        revalidate: 20,
+    }
 }
+
+
 
 export async function getProjectBySlug(slug: string): Promise<(Project & { id?: string }) | null> {
     if (!slug || !slug.trim()) {
