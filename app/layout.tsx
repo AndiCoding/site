@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/features/header/Header";
 import Footer from "@/features/footer/Footer";
@@ -22,16 +23,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-          <script dangerouslySetInnerHTML={{__html: `
-  const theme = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', theme);
-`}} />
-      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Script id="theme-init" strategy="beforeInteractive">{`
+          const storedTheme = localStorage.getItem('theme');
+          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          const theme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : systemTheme;
+          document.documentElement.setAttribute('data-theme', theme);
+        `}</Script>
         <Header className="absolute w-full z-50 min-h-16 flex justify-around" />
         {children}
-      <Footer />
+        <Footer />
       </body>
     </html>
   );

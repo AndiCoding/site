@@ -129,8 +129,8 @@ const Experience = ({ className = "", id }: ExperienceProps) => {
             id={id}
             className={`px-8 md:px-30 py-24 mt-16  ${className}`}
         >
-            <h3 className="exp-heading text-4xl font-extrabold text-gray-100 text-center mb-16">
-                My <span className="text-green-400">Experience</span>
+            <h3 className="exp-heading text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-16">
+                My <span className="text-indigo-600 dark:text-indigo-300">Experience</span>
             </h3>
             <div ref={containerRef} className="relative max-w-3xl mx-auto" style={{ minHeight: '30rem' }}>
                 {experiences.map((exp, i) => (
