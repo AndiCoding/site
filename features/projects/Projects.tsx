@@ -43,7 +43,7 @@ export const Projects = ({ className = "", projects}: ProjectsProps) => {
         setTimeline(tl)
     })
     
-    const addAnimation = useCallback((animation, index) => {
+    const addAnimation = useCallback((animation: gsap.core.TimelineChild, index: number) => {
         timeline && timeline.add(animation, index * 0.1)
     }, [timeline, expandedProject])
 
