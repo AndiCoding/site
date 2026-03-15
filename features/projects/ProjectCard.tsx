@@ -5,29 +5,34 @@ import {gsap} from "gsap"
 
 type ProjectCardProps = {
     project: Project
+    positionClasses?: string
 }
 
-const ProjectCard = ({project}: ProjectCardProps) => {
+const ProjectCard = ({project, positionClasses}: ProjectCardProps) => {
     const cardRef = useRef<HTMLDivElement>(null);
     
-    const { contextSafe } = useGSAP({scope: cardRef});
-    
-    const onCardClick = contextSafe(() => {
-        gsap.to(cardRef.current, {rotation: 180});
-    })
+    // const { contextSafe } = useGSAP({scope: cardRef});
+    //
+    // const onCardClick = contextSafe(() => {
+    //     gsap.to(cardRef.current, {rotation: 180});
+    // })
+    const onCardClick = () => {
+        window.open(project.github, '_blank', 'noopener,noreferrer');
+
+    }
 
      return (
         <div ref={cardRef}
              tabIndex={0}
              onClick={onCardClick}
              role="button"
-            className="project-card flex flex-col justify-between border w-full border-gray-300/70 dark:border-gray-700 rounded-xl p-6 bg-white dark:bg-zinc-900 backdrop-blur-sm hover:border-violet-500 transition-colors duration-300 group"
+            className={` ${positionClasses}  border-gray-300/70 dark:border-gray-700 bg-white hover:cursor-pointer dark:bg-zinc-900 backdrop-blur-sm hover:border-violet-500 transition-colors duration-300 group`}
         >
         <div>
-            <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-300 transition-colors duration-300">
+            <h4 className="text-xl font-bold  text-gray-900 dark:text-white mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-300 transition-colors duration-300">
                 {project.title}
             </h4>
-            <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4">
+            <p className=" text-gray-700 dark:text-gray-300    text-sm  mb-4">
                 {project.shortDescription}
             </p>
         </div>
