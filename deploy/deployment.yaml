@@ -17,7 +17,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: frontend
-          image: ghcr.io/andreasvaldal/site:latest
+          image: ghcr.io/andicoding/site:latest
           ports:
             - containerPort: 3000
           envFrom:
