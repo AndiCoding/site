@@ -13,8 +13,13 @@ spec:
       labels:
         app: frontend
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: frontend
-          image: nginx:1.25
+          image: ghcr.io/andreasvaldal/site:latest
           ports:
-            - containerPort: 80
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: frontend-env
