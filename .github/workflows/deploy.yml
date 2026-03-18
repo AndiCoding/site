@@ -1,28 +1,49 @@
-# ------------------------------------------------------------------
-# Continuous Deployment Workflow
-# Deploys to a self-hosted Raspberry Pi runner via Docker Compose
-# ------------------------------------------------------------------
-
-
-name: Pi Deployment
+name: Build and Deploy
 
 on:
   push:
     branches:
       - master
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
-  build-and-deploy:
-    runs-on: self-hosted
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create .env file
-        run: |
-          echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Deploy with Docker Compose
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Update deployment image tag
         run: |
-          rsync -av --exclude='.git' . /home/runner/deployment_inbox/frontend/
-          docker compose -p website-project -f /home/runner/deployment_inbox/docker-compose.yml up -d --build --remove-orphans frontend
+          sed -i "s|image: .*|image: ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}|" deploy/deployment.yaml
+
+      - name: Commit updated manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add deploy/deployment.yaml
+          git diff --staged --quiet || git commit -m "ci: update image to ${{ github.sha }}"
+          git push
