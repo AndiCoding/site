@@ -4,21 +4,13 @@ import { collection, getDocs, query, where, limit } from "firebase/firestore"
 
 
 
-// SSG. The projects are not fetched on every refresh, instead its fetched every 20 seconds
-export async function getStaticProjects() {
+export async function getStaticProjects(): Promise<Project[]> {
     const q = collection(db, "projects");
     const snap = await getDocs(q);
-    const projectsData = snap.docs.map(doc => ({
+    return snap.docs.map(doc => ({
         id: doc.id,
-        ...(doc.data() as Omit <Project, "id">)
-    }))
-
-    return {
-        props: {
-            projects: projectsData,
-        },
-        revalidate: 20,
-    }
+        ...(doc.data() as Omit<Project, "id">)
+    }));
 }
 
 
