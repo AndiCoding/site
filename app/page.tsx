@@ -4,7 +4,7 @@ import { getStaticProjects } from "./actions/projectActions";
 import {Suspense} from "react";
 import LenisWrapper from "@/features/lenisWrapper/LenisWrapper";
 
-export const revalidate = 20;
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
     const projects = await getStaticProjects();

@@ -1,6 +1,8 @@
 import type { Project } from "@/types/Project";
 import {getProjectBySlug} from "@/app/actions/projectActions";
 
+export const dynamic = "force-dynamic";
+
 type Props = { params: { slug: string } };
 
 export default async function ProjectPage({ params }: Props) {
