@@ -64,7 +64,7 @@ const Header = ({ className = '' }: HeaderProps) => {
             <ul className="flex items-center py-3 px-2 border border-gray-300/70 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-white/5 backdrop-blur-sm shadow-lg divide-x divide-gray-300/70 dark:divide-white/10">
                 <li>
                     <a
-                        href="#hero"
+                        href="/#hero"
                         className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-indigo-600 dark:hover:text-indigo-300 border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
                     >
                         Hero
@@ -81,7 +81,7 @@ const Header = ({ className = '' }: HeaderProps) => {
                 {/*</li>*/}
                 <li>
                     <a
-                        href="#projects"
+                        href="/#projects"
                         className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-indigo-600 dark:hover:text-indigo-300 border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
 
                     >

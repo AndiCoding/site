@@ -1,31 +1,46 @@
 import type { Project } from "@/types/Project";
 import {getProjectBySlug} from "@/app/actions/projectActions";
+import {LucideArrowUpRight} from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export default async function ProjectPage({ params }: Props) {
-    const project: Project | null = await getProjectBySlug(params.slug);
+    const { slug } = await params;
+    const project: Project | null = await getProjectBySlug(slug);
 
     if (!project) {
         return <div className="p-8 text-center">Project not found</div>;
     }
 
     return (
-        <main className="max-w-4xl mx-auto py-16 px-6 text-gray-800 dark:text-gray-100">
-            <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
-            <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">{project.shortDescription}</p>
+        <main className="max-w-4xl mx-auto py-32 px-6 text-gray-800 dark:text-gray-100">
+            <div className="flex justify-between align-bottom items-center gap-4 mb-4">
+                <h1 className="text-3xl font-bold">{project.title}</h1>
+                {project.github && (
+                    <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-sm text-violet-600 dark:text-violet-300 hover:underline"
+                    >
+                        GitHub <LucideArrowUpRight size={16} />
+                    </a>
+                )}
+            </div>
+            {/*<p className="text-sm text-gray-600 dark:text-gray-300 mb-6">{project.shortDescription}</p>*/}
             <div className="mb-6">
-                {project.technologiesUsed?.map((t, i) => (
+                {project.technologiesUsed?.map((technology, i) => (
                     <span key={i} className="inline-block mr-2 px-3 py-1 bg-gray-100 dark:bg-zinc-900 rounded-full text-xs text-gray-700 dark:text-gray-200">
-            {t}
+            {technology}
           </span>
                 ))}
             </div>
-            <div>
-                <h2 className="text-xl font-semibold mb-2">Details</h2>
-                <p>{project.detailedDescription}</p>
+            <div className="space-y-4">
+                {project.detailedDescription?.split('\n\n').map((paragraph, i) => (
+                    <p key={i} className="leading-relaxed">{paragraph}</p>
+                ))}
             </div>
         </main>
     );
