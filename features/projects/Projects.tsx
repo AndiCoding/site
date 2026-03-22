@@ -45,7 +45,7 @@ export const Projects = ({ className = "", projects}: ProjectsProps) => {
             <div className="flex flex-col  sm:flex-row gap-2 sm:gap-4 justify-center flex-wrap">
                 {projects && projects.map((project, i) => (
                         <ProjectCard
-                            positionClasses={"sm:rounded-xl p-4 w-full  project-card  sm:w-104"}
+                            positionClasses={"sm:rounded-xl p-4 w-full flex flex-col justify-between project-card min-h-60  sm:w-104"}
                             key={i} 
                             project={project}
                         />

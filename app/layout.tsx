@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
         <Script id="theme-init" strategy="beforeInteractive">{`
           const storedTheme = localStorage.getItem('theme');
           const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           document.documentElement.setAttribute('data-theme', theme);
         `}</Script>
         <Header className="absolute w-full z-50 min-h-16 flex justify-around" />
-        {children}
+        <div className="flex-1">{children}</div>
         <Footer />
       </body>
     </html>

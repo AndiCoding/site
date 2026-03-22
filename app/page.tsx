@@ -3,6 +3,7 @@ import { Projects } from "@/features/projects/Projects";
 import { getStaticProjects } from "./actions/projectActions";
 import {Suspense} from "react";
 import LenisWrapper from "@/features/lenisWrapper/LenisWrapper";
+import Experience from "@/features/experience/Experience";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,7 @@ export default async function Home() {
               <Hero id="hero" className="w-full h-screen" />
               {/*<Experience id="experience" className="w-full " />*/}
               <div className="h-full"></div>
+              {/*<Experience />*/}
               <Suspense fallback={<div>... Loading</div>}>
                   <Projects projects={projects} className=" w-full drop-shadow-2xl z-100 " />
               </Suspense>

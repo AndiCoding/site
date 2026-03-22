@@ -3,10 +3,11 @@ import {getProjectBySlug} from "@/app/actions/projectActions";
 
 export const dynamic = "force-dynamic";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export default async function ProjectPage({ params }: Props) {
-    const project: Project | null = await getProjectBySlug(params.slug);
+    const { slug } = await params;
+    const project: Project | null = await getProjectBySlug(slug);
 
     if (!project) {
         return <div className="p-8 text-center">Project not found</div>;
@@ -15,11 +16,11 @@ export default async function ProjectPage({ params }: Props) {
     return (
         <main className="max-w-4xl mx-auto py-16 px-6 text-gray-800 dark:text-gray-100">
             <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
-            <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">{project.shortDescription}</p>
+            {/*<p className="text-sm text-gray-600 dark:text-gray-300 mb-6">{project.shortDescription}</p>*/}
             <div className="mb-6">
-                {project.technologiesUsed?.map((t, i) => (
+                {project.technologiesUsed?.map((technology, i) => (
                     <span key={i} className="inline-block mr-2 px-3 py-1 bg-gray-100 dark:bg-zinc-900 rounded-full text-xs text-gray-700 dark:text-gray-200">
-            {t}
+            {technology}
           </span>
                 ))}
             </div>
