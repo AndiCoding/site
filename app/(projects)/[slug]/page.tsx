@@ -2,7 +2,7 @@ import type { Project } from "@/types/Project";
 import {getProjectBySlug} from "@/app/actions/projectActions";
 import {LucideArrowUpRight} from "lucide-react";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 type Props = { params: Promise<{ slug: string }> };
 

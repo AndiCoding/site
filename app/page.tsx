@@ -5,7 +5,7 @@ import {Suspense} from "react";
 import LenisWrapper from "@/features/lenisWrapper/LenisWrapper";
 import Experience from "@/features/experience/Experience";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // re-fetch from Firestore at most once per hour
 
 export default async function Home() {
     const projects = await getStaticProjects();
