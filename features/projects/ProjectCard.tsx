@@ -31,7 +31,7 @@ const ProjectCard = ({project, positionClasses}: ProjectCardProps) => {
               `}
          >
         <div>
-            <div className="flex justify-between items-start ">
+            <div className="flex justify-between items-start">
                 <h4 className="text-xl font-bold  text-gray-900 dark:text-white mb-3 transition-colors duration-300">
                     {project.title}
                 </h4>
