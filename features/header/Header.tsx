@@ -70,20 +70,19 @@ const Header = ({ className = '' }: HeaderProps) => {
                         Hero
                     </a>
                 </li>
-                {/*<li>*/}
-                {/*    <a*/}
-                {/*        href="#experience"*/}
-                {/*        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-indigo-600 dark:hover:text-indigo-300 border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}*/}
+                <li>
+                    <a
+                        href="#about-me"
+                        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-indigo-600 dark:hover:text-indigo-300 border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
                 
-                {/*    >*/}
-                {/*        Experience*/}
-                {/*    </a>*/}
-                {/*</li>*/}
+                    >
+                        About Me
+                    </a>
+                </li>
                 <li>
                     <a
                         href="/#projects"
                         className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-indigo-600 dark:hover:text-indigo-300 border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
-
                     >
                         Projects
                     </a>
