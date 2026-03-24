@@ -35,9 +35,9 @@ const ProjectCard = ({project, positionClasses}: ProjectCardProps) => {
                 <h4 className="text-xl font-bold  text-gray-900 dark:text-white mb-3 transition-colors duration-300">
                     {project.title}
                 </h4>
-                {project.github && (
+                {project.githubUrl && (
                     <a
-                        href={project.github}
+                        href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -54,7 +54,7 @@ const ProjectCard = ({project, positionClasses}: ProjectCardProps) => {
         </div>
     <div className="flex flex-col gap-4">
         <div className="flex flex-wrap gap-2 categories">
-            {project.technologiesUsed && project.technologiesUsed.map((technology, j) => (
+            {project.technologies && project.technologies.map((technology, j) => (
                 <span
                     key={j}
                     className="text-xs text-violet-700 dark:text-violet-300 border border-violet-300/60 dark:border-violet-800 bg-violet-100/60 dark:bg-violet-950/40 rounded-full px-3 py-1"

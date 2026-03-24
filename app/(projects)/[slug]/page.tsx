@@ -1,8 +1,7 @@
 import type { Project } from "@/types/Project";
 import {getProjectBySlug} from "@/app/actions/projectActions";
 import {LucideArrowUpRight} from "lucide-react";
-
-export const revalidate = 3600;
+import { PortableText } from "@portabletext/react";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -18,9 +17,9 @@ export default async function ProjectPage({ params }: Props) {
         <main className="max-w-4xl mx-auto py-32 px-6 text-gray-800 dark:text-gray-100">
             <div className="flex justify-between align-bottom items-center gap-4 mb-4">
                 <h1 className="text-3xl font-bold">{project.title}</h1>
-                {project.github && (
+                {project.githubUrl && (
                     <a
-                        href={project.github}
+                        href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-1 text-sm text-violet-600 dark:text-violet-300 hover:underline"
@@ -31,17 +30,17 @@ export default async function ProjectPage({ params }: Props) {
             </div>
             {/*<p className="text-sm text-gray-600 dark:text-gray-300 mb-6">{project.shortDescription}</p>*/}
             <div className="mb-6">
-                {project.technologiesUsed?.map((technology, i) => (
+                {project.technologies?.map((technology, i) => (
                     <span key={i} className="inline-block mr-2 px-3 py-1 bg-gray-100 dark:bg-zinc-900 rounded-full text-xs text-gray-700 dark:text-gray-200">
             {technology}
           </span>
                 ))}
             </div>
-            <div className="space-y-4">
-                {project.detailedDescription?.split('\n\n').map((paragraph, i) => (
-                    <p key={i} className="leading-relaxed">{paragraph}</p>
-                ))}
-            </div>
+            {project.description && (
+                <div className="space-y-4 leading-relaxed">
+                    <PortableText value={project.description} />
+                </div>
+            )}
         </main>
     );
 }

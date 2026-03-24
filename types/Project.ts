@@ -1,11 +1,13 @@
+import { PortableTextBlock } from "@portabletext/react";
+
 export type Project = {
     title: string;
     order: number;
-    detailedDescription?: string;
+    description?: PortableTextBlock[];
     shortDescription?: string;
     slug: string;
-    technologiesUsed?: string[];
+    technologies?: string[];
     categories?: string[];
-    github?: string;
+    githubUrl?: string;
 }
 
