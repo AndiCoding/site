@@ -24,3 +24,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Agents
+CC-Session-Logs
+.claude
+
+
