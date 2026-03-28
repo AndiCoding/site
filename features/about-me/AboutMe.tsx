@@ -44,7 +44,7 @@ const AboutMe = ({ className }: AboutMeProps) => {
             className={`px-8 md:px-30 py-24 flex flex-col sm:flex-row justify-around gap-16 items-start ${className}`}
         >
             <h3 className="about-content shrink-0 text-4xl font-extrabold text-gray-900 dark:text-white">
-                About <span className="text-indigo-600 dark:text-indigo-300">Me</span>
+                About <span className="text-accent">Me</span>
             </h3>
 
             <div className="flex flex-col gap-6 max-w-2xl">
@@ -65,7 +65,7 @@ const AboutMe = ({ className }: AboutMeProps) => {
                 {/*            key={label}*/}
                 {/*            className={`px-3 py-1 rounded-full text-sm font-medium border ${*/}
                 {/*                category === 'infra'*/}
-                {/*                    ? 'border-indigo-400 text-indigo-600 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/40'*/}
+                {/*                    ? 'border-indigo-400 text-accent bg-indigo-50 dark:bg-indigo-950/40'*/}
                 {/*                    : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/40'*/}
                 {/*            }`}*/}
                 {/*        >*/}

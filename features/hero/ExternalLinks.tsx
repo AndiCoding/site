@@ -47,14 +47,12 @@ const ExternalLinks = () => {
                     key={link.label}
                     href={link.href}
                     target={link.href.startsWith('mailto') ? undefined : '_blank'}
-                    // `group` allows us to animate children on hover.
-                    // We keep the `external-link` marker class for possible styling.
                     aria-label={link.label}
                     className="external-link animated-btn flex items-center gap-3 overflow-hidden group"
                 >
                     
                     <span
-                        className='w-24 h-16 flex items-center justify-center rounded border text-gray-500 transition-colors duration-200 whitespace-nowrap overflow-hidden group-hover:text-indigo-400 motion-reduce:transition-none'
+                        className='w-24 h-16 flex items-center justify-center rounded border text-gray-500 transition-colors duration-200 whitespace-nowrap overflow-hidden group-hover:text-accent motion-reduce:transition-none'
                     >
                         {link.icon}
                     </span>

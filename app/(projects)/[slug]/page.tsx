@@ -22,7 +22,7 @@ export default async function ProjectPage({ params }: Props) {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-sm text-violet-600 dark:text-violet-300 hover:underline"
+                        className="flex items-center gap-1 text-sm text-accent hover:underline"
                     >
                         GitHub <LucideArrowUpRight size={16} />
                     </a>
