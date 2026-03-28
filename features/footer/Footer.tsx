@@ -15,7 +15,7 @@ const Footer = ({ className = '', style }: FooterProps) => {
 
                 {/* Brand */}
                 <div className="space-y-2">
-                    <h2 className="text-lg font-bold text-gray-900 dark:text-white">Andreas Valdal</h2>
+                    <h2 className="text-lg font-bold text-gray-900 dark:text-white font-[family-name:var(--font-display)]">Andreas Valdal</h2>
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                         Passionate developer building seamless web & mobile applications.
                     </p>

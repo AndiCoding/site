@@ -14,15 +14,11 @@ const LenisWrapper = ({className, children}: LenisWrapperProps) => {
     const lenisRef = useRef<LenisRef | null>(null)
 
     useEffect(() => {
-        // per-frame update
         function update(time: number) {
-            // gsap.ticker passes time in seconds — Lenis expects ms
             lenisRef.current?.lenis?.raf(time * 1000)
         }
 
-        // register the update once on mount
         gsap.ticker.add(update)
-        // disable GSAP lag smoothing once (optional, follows Lenis docs)
         gsap.ticker.lagSmoothing(0)
         
         

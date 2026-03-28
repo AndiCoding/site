@@ -54,7 +54,6 @@ const Experience = ({ className = ""}: ExperienceProps) => {
         const cards = gsap.utils.toArray<HTMLElement>('.exp-card')
         const totalCards = cards.length
 
-        // 1) All cards start off-screen to the right, stacked at same position
         const containerWidth = containerRef.current!.offsetWidth
         cards.forEach((card, i) => {
             gsap.set(card, {
@@ -67,7 +66,6 @@ const Experience = ({ className = ""}: ExperienceProps) => {
             })
         })
 
-        // 2) Scrubbed stacking timeline — one card per segment, no overlap
         const totalScroll = totalCards * SCROLL_PER_CARD
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -96,8 +94,8 @@ const Experience = ({ className = ""}: ExperienceProps) => {
             ref={sectionRef}
             className={`px-8 md:px-30 py-24 mt-16 flex justify-between gap-16 items-start ${className}`}
         >
-            <h3 className="exp-heading hidden sm:block self-start text-4xl font-extrabold text-gray-900 dark:text-white shrink-0">
-                My <span className="text-indigo-600 dark:text-indigo-300">Experience</span>
+            <h3 className="exp-heading hidden sm:block self-start text-4xl font-black text-gray-900 dark:text-white shrink-0 font-[family-name:var(--font-display)]">
+                My <span className="text-accent">Experience</span>
             </h3>
             <div ref={containerRef} className="relative w-1/2" style={{ minHeight: '30rem' }}>
                 {experiences.map((exp, i) => (

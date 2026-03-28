@@ -42,10 +42,8 @@ const Header = ({ className = '' }: HeaderProps) => {
             const currentScrollY = window.scrollY
 
             if (currentScrollY < lastScrollY.current || currentScrollY < 10) {
-                // Scrolling up or near top → show
                 setVisible(true)
             } else {
-                // Scrolling down → hide
                 setVisible(false)
             }
 
@@ -65,7 +63,7 @@ const Header = ({ className = '' }: HeaderProps) => {
                 <li>
                     <a
                         href="/#hero"
-                        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-indigo-600 dark:hover:text-indigo-300 border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
+                        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-accent  border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
                     >
                         Hero
                     </a>
@@ -73,7 +71,7 @@ const Header = ({ className = '' }: HeaderProps) => {
                 <li>
                     <a
                         href="#about-me"
-                        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-indigo-600 dark:hover:text-indigo-300 border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
+                        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-accent  border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
                 
                     >
                         About Me
@@ -82,7 +80,7 @@ const Header = ({ className = '' }: HeaderProps) => {
                 <li>
                     <a
                         href="/#projects"
-                        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-indigo-600 dark:hover:text-indigo-300 border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
+                        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-accent  border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
                     >
                         Projects
                     </a>
@@ -91,7 +89,7 @@ const Header = ({ className = '' }: HeaderProps) => {
                     <button
                         onClick={toggleTheme}
                         aria-label="Toggle theme"
-                        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-indigo-600 dark:hover:text-indigo-300 border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
+                        className={`text-sm ${isDark ? "text-gray-100" : "text-gray-700"} hover:text-accent  border border-transparent transition-colors duration-200 font-medium tracking-wide px-2 py-1 rounded-lg block`}
 
                     >
                         {isDark ? <Sun /> : <Moon />}
