@@ -43,7 +43,7 @@ const AboutMe = ({ className }: AboutMeProps) => {
             id="about-me"
             className={`px-8 md:px-30 py-24 flex flex-col sm:flex-row justify-around gap-16 items-start ${className}`}
         >
-            <h3 className="about-content shrink-0 text-4xl font-extrabold text-gray-900 dark:text-white">
+            <h3 className="about-content shrink-0 text-4xl font-black text-gray-900 dark:text-white font-[family-name:var(--font-display)]">
                 About <span className="text-accent">Me</span>
             </h3>
 

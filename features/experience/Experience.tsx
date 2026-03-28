@@ -94,7 +94,7 @@ const Experience = ({ className = ""}: ExperienceProps) => {
             ref={sectionRef}
             className={`px-8 md:px-30 py-24 mt-16 flex justify-between gap-16 items-start ${className}`}
         >
-            <h3 className="exp-heading hidden sm:block self-start text-4xl font-extrabold text-gray-900 dark:text-white shrink-0">
+            <h3 className="exp-heading hidden sm:block self-start text-4xl font-black text-gray-900 dark:text-white shrink-0 font-[family-name:var(--font-display)]">
                 My <span className="text-accent">Experience</span>
             </h3>
             <div ref={containerRef} className="relative w-1/2" style={{ minHeight: '30rem' }}>

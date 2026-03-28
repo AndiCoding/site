@@ -48,7 +48,7 @@ export const Projects = ({ className = "", projects }: ProjectsProps) => {
 
     return (
         <section ref={sectionRef} id="projects" className={`py-24 min-h-screen flex flex-col sm:flex-row sm:justify-around sm:px-8 md:px-30 ${className}`}>
-            <h3 className="proj-heading order-first sm:order-last shrink-0 self-start text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-16 sm:mb-0 px-8 sm:px-0">
+            <h3 className="proj-heading order-first sm:order-last shrink-0 self-start text-4xl font-black text-gray-900 dark:text-white text-center mb-16 sm:mb-0 px-8 sm:px-0 font-[family-name:var(--font-display)]">
                 My <span className="text-accent">Projects</span>
             </h3>
             <div className="w-full max-w-xl flex flex-col divide-y divide-zinc-200 dark:divide-zinc-700">
