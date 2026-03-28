@@ -28,7 +28,6 @@ export default async function ProjectPage({ params }: Props) {
                     </a>
                 )}
             </div>
-            {/*<p className="text-sm text-gray-600 dark:text-gray-300 mb-6">{project.shortDescription}</p>*/}
             <div className="mb-6">
                 {project.technologies?.map((technology, i) => (
                     <span key={i} className="inline-block mr-2 px-3 py-1 bg-gray-100 dark:bg-zinc-900 rounded-full text-xs text-gray-700 dark:text-gray-200">

@@ -3,10 +3,8 @@ import { Projects } from "@/features/projects/Projects";
 import { getStaticProjects } from "./actions/projectActions";
 import {Suspense} from "react";
 import LenisWrapper from "@/features/lenisWrapper/LenisWrapper";
-import Experience from "@/features/experience/Experience";
 import AboutMe from "@/features/about-me/AboutMe";
 
-export const revalidate = 3600; // re-fetch from Firestore at most once per hour
 
 export default async function Home() {
     const projects = await getStaticProjects();
@@ -15,7 +13,6 @@ export default async function Home() {
       <main className="flex w-full flex-col justify-between sm:items-start">
           <LenisWrapper>
               <Hero id="hero" className="w-full h-screen" />
-              {/*<div className="h-full"></div>*/}
               <AboutMe className="w-full" />
 
               <Suspense fallback={<div>... Loading</div>}>

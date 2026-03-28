@@ -59,20 +59,6 @@ const AboutMe = ({ className }: AboutMeProps) => {
                     on Kubernetes, container orchestration, and Azure — focused on building and deploying
                     highly available applications.
                 </p>
-                {/*<div className="about-content flex flex-wrap gap-2 pt-2">*/}
-                {/*    {stack.map(({ label, category }) => (*/}
-                {/*        <span*/}
-                {/*            key={label}*/}
-                {/*            className={`px-3 py-1 rounded-full text-sm font-medium border ${*/}
-                {/*                category === 'infra'*/}
-                {/*                    ? 'border-indigo-400 text-accent bg-indigo-50 dark:bg-indigo-950/40'*/}
-                {/*                    : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-800/40'*/}
-                {/*            }`}*/}
-                {/*        >*/}
-                {/*            {label}*/}
-                {/*        </span>*/}
-                {/*    ))}*/}
-                {/*</div>*/}
             </div>
         </section>
     )
