@@ -29,4 +29,6 @@ pnpm-debug.log*
 CC-Session-Logs
 .claude
 
-
+# Backup script and backup output
+/backup.sh
+/backups/
